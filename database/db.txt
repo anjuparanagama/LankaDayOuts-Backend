@@ -1,0 +1,56 @@
+CREATE DATABASE dayout_db;
+USE dayout_db;
+
+CREATE TABLE packages (
+  id varchar(36) primary key,
+
+  title text not null,
+  location text not null,
+
+  price decimal(10,2) not null,
+  rating decimal(3,2) default 0,
+  reviews_count int default 0,
+
+  type enum('Couple','Group','Family'),
+  category enum('Dayout','Nightout'),
+
+  image text,
+
+  is_featured boolean default false,
+
+  created_at timestamp default current_timestamp,
+  updated_at timestamp default current_timestamp on update current_timestamp
+);
+
+CREATE TABLE tags (
+  id varchar(36) primary key,
+  name varchar(100) unique not null
+);
+
+CREATE TABLE package_tags (
+  package_id varchar(36),
+  tag_id varchar(36),
+  primary key (package_id, tag_id)
+);
+
+INSERT INTO packages (
+  id, title, location, price, rating, reviews_count, type, category, image, is_featured
+)
+VALUES (
+  '1',
+  'Galle Fort Heritage Night',
+  'Galle, Sri Lanka',
+  12000,
+  4.9,
+  203,
+  'Group',
+  'Nightout',
+  'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4',
+  true
+);
+
+INSERT INTO tags (id, name) VALUES ('t1','Dinner'), ('t2','Heritage Walk');
+
+INSERT INTO package_tags (package_id, tag_id)
+VALUES ('1','t1'), ('1','t2');]]
+

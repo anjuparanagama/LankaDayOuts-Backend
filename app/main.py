@@ -13,3 +13,7 @@ app.add_middleware(
 )
 
 app.include_router(package_router)
+
+@app.get("/")
+def read_root():
+    return {"message": "Welcome to the Lanka Day Outs Backend"}   

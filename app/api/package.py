@@ -12,7 +12,6 @@ def health_check(db: Session = Depends(get_db)):
     db.execute(text("SELECT 1"))
     return {"status": "TiDB connected successfully"}
 
-
 @router.get("/packages")
 def get_packages(db: Session = Depends(get_db)):
     result = db.execute(text("SELECT * FROM packages"))
